@@ -32,6 +32,11 @@ class PdfController extends Controller
 
         $pdfResults = [];
         foreach ($files as $file) {
+
+            if (pathinfo($file, PATHINFO_EXTENSION) !== 'txt') {
+                continue;
+            }
+
             $pdfResults[] = [
                 'name' => preg_replace('/\d+_/', '', pathinfo($file, PATHINFO_FILENAME)),
                 'content' => Storage::disk('public')->get($file),
