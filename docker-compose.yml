@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+    laravel:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel_app
+        ports:
+            - "8000:80" # Expose port 80 from container to port 8000 on host
+        volumes:
+            - .:/var/www
+            - ./storage:/var/www/storage # Mount storage directory as volume
+        networks:
+            - app-network
+        environment:
+            - APP_ENV=local
+            - APP_KEY=base64:45RWKdVH6rtcBT9Ight8wdBeYf0KkHNssEI4e/FDxnk=
+            - APP_URL=http://localhost
+
+networks:
+    app-network:
+        driver: bridge
