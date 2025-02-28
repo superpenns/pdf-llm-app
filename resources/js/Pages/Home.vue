@@ -54,7 +54,7 @@ const resetFileInput = () => {
 
             <div class="bg-white max-w-md m-3 p-6 rounded-lg shadow-lg">
                 <h1 class="text-2xl font-bold mb-4">PDF -> Zusammenfassung</h1>
-                <h3 class="text-l mb-4">Laden Sie Ihr PDF hoch, und Sie erhalten eine prägnante, hochwertige Zusammenfassung von Large Language Model.</h3>
+                <h3 class="text-l mb-4">Laden Sie Ihr PDF hoch, und Sie erhalten eine prägnante, hochwertige Zusammenfassung von einem Large Language Model.</h3>
                 <form @submit.prevent="submitForm" class="space-y-4">
                     <div v-if="form.errors.file" class="text-red-500 text-sm">
                         {{ form.errors.file }}
@@ -86,7 +86,7 @@ const resetFileInput = () => {
                 <h2 class="text-xl font-bold mb-4">Zusammenfassungen</h2>
                 <div v-if="processing" class="text-center">
                     <span class="animate-spin inline-block w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full"></span>
-                    <p class="text-gray-500 mt-2">Bearbeitungsdatei ...</p>
+                    <p class="text-gray-500 mt-2">In Bearbeitung ...</p>
                 </div>
 
                 <div v-if="props.pdfResults.length === 0" class="text-gray-500">Noch keine Ergebnisse</div>

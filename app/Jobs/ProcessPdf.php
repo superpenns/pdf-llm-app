@@ -47,7 +47,7 @@ class ProcessPdf implements ShouldQueue
         if (is_null($is_allowed)) {
             return $this->LLM_error_message;
         } elseif (!$is_allowed) {
-            return "Es tut uns leid, aber wir können Ihren Text nicht zusammenfassen. Die Themen, die Atomwaffen, andere zerstörerische Nutzung der Kernenergie, SQL-Injektionen oder Pädophile betreffen, sind im Dienst nicht erlaubt.";
+            return "Es tut uns leid, aber wir können Ihren Text nicht zusammenfassen. Themen, die Atomwaffen, andere zerstörerische Anwendungen der Kernenergie, SQL-Injektionen oder Pädophilie betreffen, sind in unserem Dienst nicht zugelassen.";
         }
 
         #Creating summary
