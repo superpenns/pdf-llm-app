@@ -33,6 +33,7 @@ class ProcessPdf implements ShouldQueue
         $pdf = $pdfParser->parseFile(storage_path("app/public/" . $this->filePath));
         $text = $pdf->getText();
         $text = $this->get_summary($text);
+        Storage::disk('public')->put("results/{$this->originalName}.txt", $text);
     }
 
     public function get_summary($text)
