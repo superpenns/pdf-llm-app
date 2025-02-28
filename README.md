@@ -10,5 +10,5 @@
 6. Run `php artisan key:generate`
 7. Add you openai key as OPENAI_API_KEY to .env file (how to get a key - https://platform.openai.com/api-keys)
 8. Run `php artisan serve`
-9. In a paraller terminal navigate to the project folder and run `npm run dev`
+9. In a parallel terminal navigate to the project folder and run `npm run dev`
 10. Navigate to http://127.0.0.1:8000/
