@@ -1,35 +1,31 @@
-# Use PHP 8.2 with CLI
-FROM php:8.2-cli
+# Use official PHP image with Apache
+FROM php:8.1-apache
 
-# Set working directory
-WORKDIR /var/www/html
+# Install system dependencies
+RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev libzip-dev git unzip && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install gd zip pdo pdo_mysql
 
-# Install required PHP extensions
-RUN apt-get update && apt-get install -y \
-    zip unzip curl git \
-    libpng-dev libjpeg-dev libfreetype6-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql mbstring
-
-# Install Node.js & npm for Vite (Frontend)
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g npm
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
 
 # Install Composer
-COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy application files
+# Set the working directory
+WORKDIR /var/www
+
+# Copy the Laravel application files
 COPY . .
 
-# Install PHP dependencies
-RUN composer install
+# Install dependencies
+RUN composer install --no-interaction --prefer-dist
 
-# Install Node.js dependencies
-RUN npm install
+# Set proper permissions for storage and cache folders
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
-# Expose Laravel development port
-EXPOSE 8000
+# Expose port 80 for Apache
+EXPOSE 80
 
-# Default command to start Laravel server
-CMD php artisan serve --host=0.0.0.0 --port=8000
+# Start Apache server
+CMD ["apache2-foreground"]
