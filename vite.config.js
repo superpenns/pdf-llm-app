@@ -10,6 +10,11 @@ export default defineConfig({
         },
         port: 3000,
         host: true,
+        cors: {
+            origin: '*', // Allow all origins (for development)
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            allowedHeaders: ['Content-Type', 'Authorization']
+        }
     },
     plugins: [
         tailwindcss(),

@@ -11,12 +11,15 @@ services:
         working_dir: /var/www
         volumes:
             - ./:/var/www
-            - ./.env:/var/www/.env
+        env_file:
+            - .env.prod
         environment:
             - APP_ENV=local
+            - OPENAI_API_KEY=${OPENAI_API_KEY}
         networks:
             - app-network
         user: "33:1000"
+        command: ["php-fpm"]
 
     nginx:
         image: nginx:alpine
